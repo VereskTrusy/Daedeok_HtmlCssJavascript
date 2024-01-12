@@ -9,6 +9,7 @@
    ojdbc6.jar,
    jquery : jquery-3.7.1.js,
    tomcat : apache-tomcat-8.5.37,
+
    
 
 24.01.12 깃허브 연동 연습하다가 교육받으면서 작성했던 코드들 싹 날렸다..
