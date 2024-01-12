@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	// html(), text(), val()
+	// 다양한 체크 요소 확인 방법
+	//$('input[type=checkbox]:checked').val()
+	//$('input:checkbox:checked').val()
+	//$(':checkbox:checked').val()
+	
+	$('#btn1').on('click',function(){
+		// 체크된 값 확인 해보기
+		//console.log($('input[type=checkbox]:checked').val());
+		
+		// 체크 한 요소 반복문을 사용하여 value 얻기
+		let str = "";
+		$('input[type=checkbox]:checked').each(function(i, value){
+			// $('input[type=checkbox]:checked').val() == v.value == $(this.val())
+			// $('input[type=checkbox]:checked').val() == this.value == $(this.val())
+			
+			str += $(this).val() + ", ";
+		});
+		
+		// 맨 마지막 끝에 ", "를 삭제해보기s
+		str = str.slice(0, str.length-2);
+		
+		// class="result2"인 요소(div)에  출력하기
+		$('.result2').html(str);
+	});
+	
+	
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="btn1" value="btn1">
+	<br><br>
+	<div id="result1">
+	<form>
+		취 미 :
+		<input type="checkbox" name="hobby" value="여행" checked>여행
+		<input type="checkbox" name="hobby" value="장기">장기
+		<input type="checkbox" name="hobby" value="바둑">바둑
+		<input type="checkbox" name="hobby" value="독서" >독서
+		<input type="checkbox" name="hobby" value="낚시">낚시<br><br>
+		<input type="button" value="전송">
+		</form>
+	</div>
+</div>
+
+<div class="result2"></div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn1').on('click', function(){
+		let str = "";
+		$('#content *:hidden').each(function(){
+			str += $(this).text() + "<br>";
+		});
+		console.log(str);
+		// 출력
+		$('#result1').html(str);
+	});
+	
+	$('#btn2').on('click', function(){
+		let str = "";
+		$('#content *:visible').each(function(){
+			str += $(this).text() + "<br>";
+		});
+		console.log(str);
+		// 출력
+		$('#result2').html(str);
+	})
+});
+
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="btn1" value="btn1">
+	<input type="button" id="btn2" value="btn2">
+	<br><br>
+	<div id="content">
+		<p> 보이는 문단</p>
+		<p style="visibility:hidden;">숨겨진 문단</p>
+		<p style="display:none;"> 자리를 차지 하지 못한 문단 </p>
+		<p style="opacity:0;"> 투명한 문단</p>
+	</div>
+</div>
+
+<div class="box" id="result1"></div>
+<div class="box" id="result2"></div>
+
+</body>
+</html>

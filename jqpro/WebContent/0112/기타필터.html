@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn1').on('click', function(){
+		let tagName = "";
+		let str = "";
+		
+		$('#testForm *:hidden').each(function(i, tag){
+			tagName = tag.tagName;
+			//alert(tagName);
+			
+			if(tagName == 'INPUT') {
+				str += tagName + "=> " + $(this).attr('name') + " : " + $(this).val() + "<br>";
+				str += $(this).val() + "<br>";
+			} else {
+				str += tagName + "=> " + $(this).text() + "<br>";
+			}			
+		});
+		
+		$('#result1').html(str);
+	});
+	
+	$('#btn2').on('click', function(){
+		let tagName = "";
+		let str = "";
+		$('#testForm *:visible').each(function(i, tag){
+			tagName = tag.tagName;
+			//alert(tagName);
+			
+			
+			if(tagName == 'INPUT') {
+				str += tagName + "=> " + $(this).attr('name') + " : " + $(this).val() + "<br>";
+				str += $(this).val() + "<br>";
+			} else {
+				str += tagName + "=> " + $(this).text() + "<br>";
+			}
+		});
+		
+		$('#result1').html(str);
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="btn1" value="btn1">
+	<input type="button" id="btn2" value="btn2">
+	<br><br>
+	<div id="content">
+		<form id="testForm"> 
+			<input type="hidden" name="userAge" value="33" id="userAge">
+			<input type="hidden" name="userCity" value="대전" id="userCity">
+			
+			I D : 
+			<input type="text" name="userID" value="hong" id="userId">
+			<span style="display:none">ID가 중복됩니다.</span> 
+			<br>  
+			
+			이름 : 
+			<input type="text" name="userName" value="홍길동" id="userName">
+			<span style="visibility:hidden">이름을 입력하세요</span>
+			<br>  
+			
+			성별 : <input type="radio" name="sung" value="남" checked>남자  
+			<input type="radio" name="sung" value="여">여자  
+		</form>
+	</div>
+</div>
+<div class="box" id="result1"></div>
+<div class="box" id="result2"></div>
+
+</body>
+</html>
