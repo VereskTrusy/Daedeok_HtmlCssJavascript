@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+
+/* 요소 렌더링 완료 후 호출될 함수 */
+$(document).ready(function(){
+	
+	// 버튼 1 클릭 시 배경컬러 변경
+	$('#btn1').on('click', function(){
+		$('#result1').css('background', 'pink');
+	})
+	
+	// 버튼 2 클릭 시 배경컬러 변경
+	$('#btn2').on('click', function(){
+		$('#result2').css('background', 'pink');		
+	})
+});
+
+
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+</head>
+<body>
+<pre>
+1. 요소의 접근
+ 1) 자바스크립트 문법으로 요소 접근 방법
+    document.getElementById('요소명');
+    '요소명'의 요소들 모두 선택됨, #아이디명과 .클래스명을 '요소명'자리에 써줘서 접근도 가능하다
+
+ 2) jQuery 문법으로 요소 접근 방법 
+    $('요소명')
+    '요소명'의 요소들 모두 선택됨, #아이디명과 .클래스명을 '요소명'자리에 써줘서 접근도 가능하다
+   
+2. HTML요소 렌더링 후 함수 호출
+ 1) 요소 렌더링 이전 함수호출하여 요소 접근 시 오류 발생한다
+         그러므로 요소가 모두 렌더링 후 함수호출하고 요소에 접근 하는데,
+         몇가지 방법을 알아보자
+ 
+ 2) 자바스크립트 문법으로 요소 렌더링 후 함수 호출 방법
+   window.onload = function(){ 
+       // 로드 후 실행할 로직
+   }
+ 
+ 3) jQuery 문법으로 요소 렌더링 후 함수 호출 방법 1
+    $(document).ready( function(){ 
+        // 로드 후 실행할 로직
+    })
+    
+ 4) jQuery 문법으로 요소 렌더링 후 함수 호출 방법 2
+    $(function(){
+        // 로드 후 실행할 로직
+    });
+</pre>
+<div class="box">
+	<h4>자바스크립트 문법으로 요소 접근 - 배경색 변경</h4>
+	<input type="button" value="버튼" id="btn1">
+	<br><br>
+	<div id="result1"></div>
+</div>
+
+<div class="box">
+	<h4>jQuery 문법으로 요소 접근 - 배경색 변경</h4>
+	<input type="button" value="버튼" id="btn2">
+	<br><br>
+	<div id="result2"></div>
+</div>
+
+</body>
+</html>

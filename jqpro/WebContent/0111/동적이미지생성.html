@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="../CSS/public.css">
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	imgPathArr = ["Desert.jpg",
+		          "Chrysanthemum.jpg",
+		          "cloud03.jpg",
+		          "coffee1.jpg",
+		          "pattern.jpg",
+		          "maxresdefault.jpg"];
+		
+	$('#btn1').on('click', function(){
+		index = Math.floor(Math.random() * imgPathArr.length);
+		
+		// 이미지 생성
+		//vImg = $('<img src="../images/Sony1.jpg" alt="a" onclick="borderStyle()"></img>');
+		vImg = $('<img>', {
+			'src' : '../images/' + imgPathArr[index],
+			'alt' : imgPathArr[index],
+			'click' : borderStyleSet
+		});
+		
+		// result1에 추가
+		$('#result1').append(vImg);
+	});
+})
+
+function borderStyleSet(){
+	if($('img').css('border') != null){
+		$('img').css('border', 'none');
+	}
+	$(this).css('border', '1px solid black');
+}
+
+</script>
+<style>
+img{
+	width: 100px;
+	height: 100px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" value="btn1" id="btn1">
+	<br><br>
+	<div id="result1"></div>
+</div>
+
+</body>
+</html>

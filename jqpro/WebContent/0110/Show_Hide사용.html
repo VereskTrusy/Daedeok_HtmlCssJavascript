@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+
+// html 객체가 모두 로드 된 후 해당 함수 실행 - 선언방법 1
+// 로드되자마자 실행됨
+// $(document).ready(function(){ });
+
+
+// html 객체가 모두 로드 된 후 해당 함수 실행 - 선언방법 2
+// 로드되자마자 실행됨
+// $(function(){ });
+// $( () => { }); // 람다함수 형식으로 사용
+
+
+// html 객체가 모두 로드 된 후 해당 함수 실행 - 선언방법 3
+// 로드되자마자 실행됨
+$(function(){
+	// 클릭 시 h2를 감추기
+	$('#result1 h2').on('click', function(){
+		// 방법 1
+		//this.style.display = "none";
+		
+		// 방법 2
+		//$(this).css('display', 'none');
+		
+		// 방법 3
+		$(this).hide(); // 여기서 this는 h2태그
+		
+		// 모든 h2 요소가 hide 되었는지 확인 후 
+		// '보이기'버튼 요소 show() 하기
+		// $('#result1 h2:visible').length; // h2:visible : 필터, h2 요소중 화면에 보이는 요소를 선택하라
+		if($('#result1 h2:visible').length < 1) {
+			$('#btnShowHeaders').show();
+		}
+	})
+	
+	// '보이기'버튼 클릭 시 result1 하위 h2 요소 화면에 보이게 설정하기
+	$('#btnShowHeaders').on('click', function(){
+		$('#result1 h2').show();
+		
+		$(this).hide(); // 여기서 this는 '보이기'버튼
+	});
+});
+
+
+
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+<style type="text/css">
+#btnShowHeaders{
+	display: none;
+}
+</style>
+</head>
+<body>
+
+
+<div class="box">
+	<h4>클릭하면 show()와 hide() </h4>
+	<input type="button" value="보이기" id="btnShowHeaders">
+	<br><br>
+	<div id="result1">
+		<h2>클릭하면 사라집니다 1</h2>
+		<h2>클릭하면 사라집니다 2</h2>
+		<h2>클릭하면 사라집니다 3</h2>
+		<h2>클릭하면 사라집니다 4</h2>
+		<h2>클릭하면 사라집니다 5</h2>
+		<h2>클릭하면 사라집니다 6</h2>
+		<h2>클릭하면 사라집니다 7</h2>
+		<h2>클릭하면 사라집니다 8</h2>
+		<h2>클릭하면 사라집니다 9</h2>
+		<h2>클릭하면 사라집니다 10</h2>
+	</div>
+</div>
+
+</body>
+</html>

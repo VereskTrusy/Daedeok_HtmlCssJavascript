@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+// 문서 로드 후 실행
+$(document).ready(function(){
+	$(#btn1).on('click', setColor);
+})
+
+function setColor(){
+	console.log("check");
+}
+
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4>
+	$('body').html(); : body태그 하위의 모든 태그를 포함한 문자열 반환<br>
+	$('body').text(); : body태그 안의 문자들을 반환<br>
+	</h4>
+	<input type="button" id="btn1" value="btn1">
+	<br><br>
+	<div id="result1"></div>
+</div>
+
+</body>
+</html>

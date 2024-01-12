@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn1').on('click', function(){
+		// ul 하위 li 요소 중 첫번째와 마지막번째 li의 백그라운드 핑크색으로 적용
+		$('li:first, li:last').css('background', 'pink');
+		
+		// ul 하위 li 요소 중 0~4번째 까지 li의 글자 볼드체로 적용
+		//$('')
+	});
+	
+	$('#btn2').on('click', ()=>{
+		// 테이블의 짝수번째 tr 요소
+		$('tr:even').css('background', '#CDF6CD');
+		
+		// 테이블요소의 홀수번째 tr 요소
+		$('tr:odd').css('background', '#F4F6CF')
+		
+		// 테이블의 첫행 
+		$('tr:first').css('background', 'black')
+		             .css('color', 'white')
+		             .css('font-size', '1.5rem')
+		             .css('font-weight', 'bold');
+		// 테이블의 마지막 행 
+		$('tr:last').css({
+			'background': 'black',
+			'color': 'white',
+            'font-size': '1.5rem',
+            'font-weight': 'bold'
+		});
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+<style type="text/css">
+table{
+	border: 1px solid blue;
+}
+td{
+	width: 100px;
+	height: 20px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="btn1" value="btn1">
+	<br><br>
+	<div id="result1">
+		<ul>
+			<li>one</li>
+			<li>two</li>
+			<li>three</li>
+			<li>four</li>
+			<li>five</li>
+			<li>six</li>
+			<li>seven</li>
+			<li>eight</li>
+			<li>nine</li>
+		</ul>
+	</div>
+</div>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="btn2" value="btn2">
+	<br><br>
+	<div id="result2">
+		<table border="1">
+			<tr>
+				<th>첫 행1</th>
+				<th>첫행 2</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>마지막 행1</td>
+				<td>마지막 행2</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+</html>

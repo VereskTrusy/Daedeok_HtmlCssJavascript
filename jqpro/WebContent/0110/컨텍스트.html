@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+
+function proc1() {
+	// 모든 p태그 선택
+	$('p').css('color', 'red');
+}
+
+
+$(document).ready(function(){
+	$('.box  .parentElement').on('click', function(){
+		// 클릭된 div, 여기서 this는 div
+		$('p', this).css('background', 'pink');
+	});	
+	
+	// 1 순위 실행
+	$('p', document.forms[0]).on('click', function(){
+		$(this).css('font-size', '+=5px');
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+<style type="text/css">
+form {
+	border: 2px solid green;
+	margin: 5px;
+	padding: 5px;
+}
+p {
+	border: 1px solid red;
+}
+</style>
+</head>
+<body>
+
+
+<div class="box">
+	<h4></h4>
+	<input type="button" value="확인" onclick="proc1()">
+	<br><br>
+	<div id="result1" class="parentElement">
+		<p>div태그 : result1, 하위  p태그 1번</p>
+	</div>
+	<div id="result2" class="parentElement">
+		<p>div태그 : result2, 하위  p태그 2번</p>
+	</div>
+	<from class="parentElement">
+		<p>form태그 하위  p태그 3번</p>
+	</from>
+	
+	<from class="parentElement">
+		<p>form태그 하위  p태그 4번</p>
+	</from>
+</div>
+
+</body>
+</html>

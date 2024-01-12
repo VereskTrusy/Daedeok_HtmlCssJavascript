@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('#btn1').on('click', function(){
+		// h3 다음의 모든 형제의 배경색을 변경, 길이지정, 가운데정렬
+		// 요소 속성 지정 방법 - 개별 
+		$('h3 ~p').css('background-color', 'pink')
+		          .css('width', '200px')
+		          .css('height', '50px')
+		          .css('text-align', 'center');
+		
+		// 요소 속성 지정 방법 - json형태로 한번에 지정
+		$('h3 ~p').css({
+			'background-color': 'pink',
+			'width': '200px',
+			'height': '50px',
+			'text-align': 'center'
+		});
+		
+		// h3 다음의 첫번째 형제의 글자를 굵게, 크게 : font-weight
+		$('h3 +p').css('font-weight', 'bold')
+		          .css('font-size', '2.0rem');
+	});
+});
+
+
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4>h3 다음의 모든 형제의 배경색을 변경, 길이지정, 가운데정렬<br>
+	h3 다음의 첫번째 형제의 글자를 굵게, 크게 : font-weight</h4>
+	<input type="button" id="btn1" value="btn1">
+	<br><br>
+	<div id="result1">
+		<p>형제 선택자 에 대하여</p>
+		<h3> 꼬마버스 타요 가족을 소개 합니다</h3>
+		<p> 타요</p>
+		<p> 로기</p>
+		<p> 라니 </p>
+		<p> 가니 </p>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<script type="text/javascript">
+function proc1() {
+	// 전체 배경색 변경
+	$('*').css('background-color', 'gray');
+	
+	// h1 요소의 글자색을 파랑으로 변경
+	$('h1').css('color', 'blue');
+	
+	// id가 para인 요소의 글자색은 녹색
+	$('#para').css('color', 'green');
+	
+	// class가 sample요소의 글자색은 빨강
+	$('.sample').css('color', 'red');
+	
+}
+</script>
+
+
+</head>
+<body>
+
+
+<div class="box">
+	<h4></h4>
+	<input type="button" value="확인" onclick="proc1()">
+	<br><br>
+	<div id="result1">
+		<h1>h1태그 요소 선택</h1>
+		<h2 id="para">h2태그 id="para" 요소 선택</h2>
+		<h3 class="sample">h3태그 class="sample" 요소 선택</h3>
+	</div>
+</div>
+
+</body>
+</html>

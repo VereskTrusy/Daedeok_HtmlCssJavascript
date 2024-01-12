@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(() => {
+	// 접근 및 이벤트 함수 선언방식
+	// $('#btn2').on('click', () => { }); // 선언방식 - 사용 o
+	// $('#btn2').bind('click', ()=>{ }); // 선언방식 - 사용 x
+	// $('#btn1').click(function(){ }); // 선언방식 - 사용 x
+	
+	
+	// btn1 요소 접근
+	$('#btn1').on('click', function() {
+		
+		//hList = document.getElementsByTagName('h1'); // 모든 h1 태그를 배열로 가져온다
+		//hList.style.color = 'red'; // 에러코드 : 배열 전체로 접근하면 안된다, 반복문을 사용해서 개별로 접근해야한다.
+		//hList[0].style.color = 'red'; // 가능코드 : 개별로 속성 적용
+		
+		// result1 하위의 h1 태그를 배열로 가져온다.
+		hList = document.querySelectorAll('#result1 h1'); 
+		
+		// result1 하위 모든 h1태그의 컬러 변경
+		for(var i = 0; i < hList.length; i++) {
+			hList[i].style.color = 'red';
+		}
+		
+		// 개별 요소 접근
+		hList[1].style.color = 'blue';
+		hList[3].style.color = 'blue';
+		
+		// DOM변수를 $( )로 감싸면 jquery 변수가 된다.
+		$(hList[2]).css('background', 'yellow');
+		$(hList).eq(3).css('background', 'pink');
+		
+	}); // btn1 요소 접근 끝
+	
+	
+	// btn2 요소 접근
+	$('#btn2').on('click', () => {
+		
+		// hList = $('h1'); // 모든 h1 태그를 배열로 가져온다
+		hList = $('#result2 h1'); // result1 하위의 h1 태그를 배열로 가져온다.
+		
+		// result1 하위 모든 h1태그의 컬러 변경
+		hList.css('background', 'red');
+		
+		// 개별 요소 접근
+		hList.eq(1).css('background', 'green');
+		
+		// jquery변수[인덱스]로 접근하면 DOM변수로 전환된다
+		hList[0].style.color = 'blue';
+		
+	}); // btn2 요소 접근 끝
+	
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+</head>
+<body>
+
+
+<div class="box">
+	<h4></h4>
+	<input type="button" value="확인" id="btn1">
+	<br><br>
+	<div id="result1">
+		<h1>무궁화 꽃이 피었습니다.</h1>
+		<h1>무궁화 꽃이 피었습니다.</h1>
+		<h1>무궁화 꽃이 피었습니다.</h1>
+		<h1>무궁화 꽃이 피었습니다.</h1>
+		<h1>무궁화 꽃이 피었습니다.</h1>
+	</div>
+</div>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" value="확인" id="btn2">
+	<br><br>
+	<div id="result2">
+		<h1>무궁화 꽃이 피었습니다.</h1>
+		<h1>무궁화 꽃이 피었습니다.</h1>
+		<h1>무궁화 꽃이 피었습니다.</h1>
+		<h1>무궁화 꽃이 피었습니다.</h1>
+		<h1>무궁화 꽃이 피었습니다.</h1>
+	</div>
+</div>
+
+</body>
+</html>

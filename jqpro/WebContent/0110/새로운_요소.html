@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+
+function proc1() {
+/* //문자열
+let textNode = document.createTextNode("hello");
+
+// p 태그 생성
+let newElement = document.createElement('p');
+newElement.setAttribute('class', 'pp');
+newElement.onclick(function(){
+	alert("Hello");
+});
+
+// p 태그에 선택된 문자열 추가
+newElement.appendChild(textNode);
+
+// 출력할 요소에 접근 - p태그에 추가한다 
+document.getElementById('result1').appendChild(newElement); */
+}
+
+
+function proc2() {
+	// 새로운 태그 만들기
+	vhtml = $('<p class="pp">hello</p>');
+	
+	// result2에 추가
+	$('#result2').append(vhtml);
+}
+
+function proc3(){
+	// vp = $('<p></p>');
+	// vp = $('<p/>');
+	vp = $('<p></p>', {
+		'class': 'pp',
+		'id' : 'p1',
+		'text' : 'proc3',
+		'click' : function(){
+			let cr = Math.floor(Math.random() * 256); // Math.random() * 255 + 1
+			let cg = Math.floor(Math.random() * 256);
+			let cb = Math.floor(Math.random() * 256);
+			
+			
+			
+			//alert("proc333");
+			$(this).css('color', `rgb(${cr}, ${cg}, ${cb})`);
+			$(this).css('font-size', '+=5px');
+		}
+	});
+	
+	// result3 추가
+	$('#result3').append(vp);
+}
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+</head>
+<body>
+
+
+<div class="box">
+	<h4></h4>
+	<input type="button" value="btn1" onclick="proc1()">
+	<br><br>
+	<div id="result1"></div>
+</div>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" value="btn2" onclick="proc2()">
+	<br><br>
+	<div id="result2"></div>
+</div>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" value="btn2" onclick="proc3()">
+	<br><br>
+	<div id="result3"></div>
+</div>
+
+</body>
+</html>
