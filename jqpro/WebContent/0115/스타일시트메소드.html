@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4>
+		스타일시트(CSS) 관련 메서드<br>
+		css(name) : 매치되는 첫번째 요소의 스타일 속성을 반환한다. 예) $(this).css('color');<br>
+		css(name, value) : 매치되는 모든 요소들의 단일 스타일 속성을 설정한다. 예) $(this).css(‘color’ , ‘red’);<br>
+		css(propertis) : 매치되는 모든 요소들의 스타일 속성에 키:값을 설정한다. 예) $(this.).css({‘color’:’blue’, ‘font-size’:’20px’ });<br>
+		addClass(class) : 매치된 요소들의 집합에 지정된 css 클래스를 추가한다<br>
+		hasClass(class) : 지정된 클래스가 매치된 요소들의 집합 중 최소 한군데 이상 적용 되어 있으면 true 를 리턴 한다<br>
+		removeClass(class) : 매치된 요소들의 집합에서 지정된 css클래스를 삭제한다<br>
+		toggleClass(class) : 매치된 요소들에 지정된 클래스가 적용되지 않았다면 적용하고 , 이미 적용되어 있다면 제거한다<br>
+	</h4>
+	<input type="button" id="btn1" value="btn1" onclick="proc1()">
+	<br><br>
+	<div id="result1"></div>
+</div>
+
+</body>
+</html>

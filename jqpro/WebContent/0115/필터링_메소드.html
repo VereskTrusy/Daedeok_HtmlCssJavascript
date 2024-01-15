@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+
+$(document).ready(function(){
+	// $('셀렉터').eq(숫자) : 셀렉터에 해당하는 요소중 특정 순서의 것을 찾습니다.
+	$('#btn_eq').on('click', function(){
+		$('#group1 li').eq(1).css('background', 'pink');
+	});
+	
+	
+	// $('셀렉터').first() : 선택요소 중 가장 첫 번째 요소
+	$('#btn_first').on('click', function(){
+		$('#group1 li').first().css('background', 'green');
+	});
+	
+	
+	// $('셀렉터').eq(숫자) : 셀렉터에 해당하는 요소중 특정 순서의 것을 찾습니다.
+	$('#btn_last').on('click', function(){
+		$('#group1 li').last().css('background', 'black');
+	});
+	
+	
+	// $('셀렉터').even()  : 선택한 요소의 짝수번째
+	$('#btn_even').on('click', function(){
+		alert($('#group1 li').even().text());
+	});
+	
+	
+	// $('셀렉터').odd()  : 선택한 요소의 짝수번째
+	$('#btn_odd').on('click', function(){
+		alert($('#group1 li').odd().text());
+	});
+	
+	
+	// filter : 선택요소 중 Selector와 일치하는 요소를 필터링한다.
+	$('#btn_filter').on('click', function(){
+		//alert($('#group1 li:eq(1)').text());
+		alert($('#group1 li').filter(':eq(1)').text());
+	});
+	
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4>필터링 메서드 여러개중 필요한걸 찾거나 선택한다.</h4>
+	<input type="button" id="btn_eq" value="리스트요소.eq(숫자)">
+	<input type="button" id="btn_first" value="리스트요소.first()">
+	<input type="button" id="btn_last" value="리스트요소.last()">
+	<input type="button" id="btn_even" value="리스트요소.even()">
+	<input type="button" id="btn_odd" value="리스트요소.odd()">
+	<input type="button" id="btn_filter" value="리스트요소.filter(':eq(1)')">
+	<ul id="group1">
+		<li><p>test0 : $('셀렉터').first() : 선택요소 중 가장 첫 번째 요소</p></li>
+		<li><p>test1 : $('셀렉터').eq(숫자) : 셀렉터에 해당하는 요소중 특정 순서의 것을 찾습니다.</p></li>
+		<li><p>test2 : $('셀렉터').even() : 선택한 요소의 짝수번째</p></li>
+		<li><p>test3 : $('셀렉터').odd() : 선택한 요소중 홀수번째</p></li>
+		<li>
+			<p>test4 : $('셀렉터').filter('필터링') : 선택요소 중 Selector와 일치하는 요소를 필터링한다.</p>
+			<p>:fitst : 첫번째로 일치하는 요소를 가져온다.</p>
+			<p>:last : 마지막으로 일치하는 요소를 가져온다.</p>
+			<p>:even : 짝수번째 요소를 모두 가져온다 ( first index : 0 )</p>
+			<p>:odd : 홀수번째 요소를 모두 가져온다 ( first index : 0 )</p>
+			<p>:eq(index) : 인자로 전달된 index에 해당하는 요소를 가져온다. ( first index : 0 )</p>
+			<p>:gt(index) : 인자로 전달된 index 보다 큰 index를 가진 요소를 모두 가져온다.</p>
+			<p>:lt(index) : 인자로 전달된 index 보다 작은 index를 가진 요소를 모두 가져온다.</p>
+			<p>:has(selector) : 인자로 전달된 selector 요소를 하나 이상 포함하고 있는 요소를 가져온다.</p>
+			<p>:not(selector) : 인자로 전달된 selector 와 일치하지 않는 모든요소를 가져온다.</p>
+		</li>
+		<li><p>test5 : $('셀렉터').last() : 선택요소 중 가장 마지막 번째 요소</p></li>
+	</ul>
+</div>
+
+</body>
+</html>
