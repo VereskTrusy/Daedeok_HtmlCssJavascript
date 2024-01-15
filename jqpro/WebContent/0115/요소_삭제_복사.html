@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+
+$(document).ready(function(){
+	// 요소.empty() : 요소의 내용을 지운다. 태그는 그래도 남아 있는다.
+	$('#empty').on('click', function(){
+		let beforeTag = $('#div_empty').html(); // empty 이전 태그내용
+
+		$('#p1').empty(); // 사용
+		
+		let afterTag = $('#div_empty').html(); // empty 이후 태그내용
+		$('#result1').text("empty 이전 태그내용 : " + beforeTag); // 결과
+		$('#result2').text("empty 이후 태그내용 : " + afterTag); // 결과
+	});
+	
+	
+	
+	// 요소.remove() : 선택한 요소를 HTML 문서에서 제거한다.
+	//   예) $('p').remove();
+	//   예) $( 'p' ).remove( '.rm' ); : 클래스 값으로 rm을 가진 p 요소를 제거한다.<br>
+	//   예) $( 'p.rm' ).remove(); : 결과는 같다.<br>
+	$('#remove').on('click', function(){
+		let beforeTag = $('#div_remove').html(); // remove 이전 태그내용
+		
+		$('#p2').remove(); // 사용
+		
+		$('p#p3').remove(); // 사용 : p태그 중에서 id가 p3인 요소 제거
+		
+		let afterTag = $('#div_remove').html(); // remove 이후 태그내용
+		$('#result3').text("remove 이전 태그내용 : " + beforeTag); // 결과
+		$('#result4').text("remove 이후 태그내용 : " + afterTag); // 결과
+	});
+	
+	
+	// 요소.clone() : 일치된 요소를 복사하고 선택한다.
+	// 요소.clone(true) : 일치된 요소의 이벤트 처리기를 포함하여 복사하고 선택한다.
+	$('#clone').on('click', function(){
+		$('#p4').clone(true).appendTo('#result5'); // 사용
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+<style type="text/css">
+p{
+	width: 300px;
+	border: 1px solid pink;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<h4>
+	삭제 관련 메소드<br>
+		요소.empty() : 요소의 내용을 지운다. 태그는 그래도 남아 있는다.<br>
+		요소.remove() : 선택한 요소를 HTML 문서에서 제거한다.<br>
+			예) $('p').remove();
+			예) $( 'p' ).remove( '.rm' ); : 클래스 값으로 rm을 가진 p 요소를 제거한다.<br>
+			예) $( 'p.rm' ).remove(); : 결과는 같다.<br>
+	복사 관련 메소드<br>
+		요소.clone() : 일치된 요소를 복사하고 선택한다.<br>
+		요소.clone(true) : 일치된 요소의 이벤트 처리기를 포함하여 복사하고 선택한다.<br>
+	</h4>
+	<input type="button" id="empty" value="empty()">
+	<div id="div_empty">
+		<p id="p1">p1 요소.empty() 테스트</p>
+	</div>
+	<br>
+	<div id="result1">결과 1</div>
+	<div id="result2">결과 2</div>
+	
+	<br>
+	
+	<input type="button" id="remove" value="remove()">
+	<div id="div_remove">
+		<p id="p2"><span>p2요소.remove() 테스트</span></p>
+		<p id="p3"><span>p3  테스트</span></p>
+	</div>
+	<div id="result3">결과 3</div>
+	<div id="result4">결과 4</div>
+	
+	<br>
+	
+	<input type="button" id="clone" value="clone()">
+	<div id=div_clone>
+		<p id="p4">p4 clone() 테스트</p>
+	</div>
+	<div id="result5"></div>
+</div>
+
+
+
+</body>
+</html>
+
+
+
+
+
+

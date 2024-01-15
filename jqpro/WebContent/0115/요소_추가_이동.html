@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	/*
+	조작관련 메소드
+	요소.append(콘텐츠) : 일치된 요소 내부의 마지막 위치에  '콘텐츠'를 추가한다.
+	요소.appendTo(셀렉터) : 선택된 요소를 '셀렉터'에 일치된 모든 요소들의 내부 마지막 위치에 추가한다.
+	                 만일, 일치된 요소가 본문에 존재하면 그 요소를 제거한 후 복사한다(이동)
+	요소.prepend(콘텐츠) : append()와 동일 다만, 내부의 처음 위치에 추가한다.
+	요소.prepenTo(셀렉터) : appendTo()와 동일 다만, 내부의 처음위치에 추가한다.
+	*/
+	
+	// 요소.append(콘텐츠) : 일치된 요소 내부의 마지막 위치에  '콘텐츠'를 추가한다.
+	$('#append').on('click', function(){
+		let vimg = $("<img src='../images/check.png' alt='check.png'>"); // 이미지
+		$('#p1').append(vimg); // 마지막 위치
+	});
+	
+	
+	// 요소.appendTo(셀렉터) : 선택된 요소를 '셀렉터'에 일치된 모든 요소들의 내부 마지막 위치에 추가한다.
+	//                      만일, 일치된 요소가 본문에 존재하면 그 요소를 제거한 후 복사한다(이동)
+	$('#appendTo').on('click', function(){
+		let vimg = $("<img src='../images/icons8.png' alt='icons8.png'>"); // 이미지
+		$(vimg).appendTo('#p2'); // 마지막 위치
+	});
+	
+	
+	// 요소.prepend(콘텐츠) : append()와 동일 다만, 내부의 처음 위치에 추가한다.
+	$('#prepend').on('click', function(){
+		let vimg = $("<img src='../images/check.png' alt='check.png'>");
+		$('#p3').prepend(vimg); // 처음 위치
+	});
+	
+	
+	// 요소.prepenTo(셀렉터) : appendTo()와 동일 다만, 내부의 처음위치에 추가한다.
+	$('#prependTo').on('click', function(){
+		let vimg = $("<img src='../images/icons8.png' alt='icons8.png'>");
+		$(vimg).prependTo('#p4'); // 처음 위치
+	});
+	
+	
+	// 요소.after(콘텐츠) : 일치된 요소 뒤로 콘텐츠를 삽입한다. 요소 외부에 삽입된다.
+	$('#after').on('click', function(){
+		let vimg = $("<img src='../images/check.png' alt='check.png'>");
+		$('#p5').after(vimg);
+	});
+	
+	
+	// 요소.insertAfter(셀렉터) : 선택된 요소를 셀렉터에 의해 일치된 모든 요소들 뒤쪽에 삽입한다.
+	$('#insertAfter').on('click', function(){
+		let vimg = $("<img src='../images/icons8.png' alt='icons8.png'>");
+		$(vimg).insertAfter('#p5');
+	});
+	
+	
+	// 요소.before(콘텐츠) : 일치된 요소 앞에 콘텐츠를 삽입한다. 요소 외부에 삽입된다.
+	$('#before').on('click', function(){
+		let vimg = $("<img src='../images/check.png' alt='check.png'>");
+		$('#p5').before(vimg);
+	});
+	
+	
+	// 요소.insertBefore(셀렉터) : 선택된 요소를 셀렉터에 의해 일치된 모든 요소들 앞쪽에 삽입한다.
+	$('#insertBefore').on('click', function(){
+		let vimg = $("<img src='../images/icons8.png' alt='icons8.png'>");
+		$(vimg).insertBefore('#p5');
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+<style>
+img{
+	width: 25px;
+	height: 25px;
+}
+p{
+	width: 300px;
+	border: 1px solid pink;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<h4 id="move">
+		조작관련 메소드<br>
+		요소.append(콘텐츠)   : 일치된 요소 내부의 마지막 위치에  '콘텐츠'를 추가한다.<br>
+		요소.appendTo(셀렉터) : 선택된 요소를 '셀렉터'에 일치된 모든 요소들의 내부 마지막 위치에 추가한다.<br>
+	                 	          만일, 일치된 요소가 본문에 존재하면 그 요소를 제거한 후 복사한다(이동)<br><br>
+	</h4>
+	<input type="button" id="append" value="append()">
+	<input type="button" id="appendTo" value="appendTo()">
+	<br><br>
+	<p id="p1">p1</p>
+	<p id="p2">p2</p>
+	<div id="result1"></div>
+</div>
+
+<div class="box">
+	<h4>
+		조작관련 메소드<br>
+		요소.prepend(콘텐츠)  : append()와 동일 다만, 내부의 처음 위치에 추가한다.<br>
+		요소.prepenTo(셀렉터) : appendTo()와 동일 다만, 내부의 처음위치에 추가한다.<br><br>
+	</h4>
+	<input type="button" id="prepend" value="prepend()">
+	<input type="button" id="prependTo" value="prependTo()">
+	<br><br>
+	<p id="p3">p3</p>
+	<p id="p4">p4</p>
+	<div id="result2"></div>
+</div>
+
+	
+<div class="box">
+	<h4>
+		조작관련 메소드<br>
+		요소.after(콘텐츠)       : 일치된 요소 뒤로 콘텐츠를 삽입한다. 요소 외부에 삽입된다.<br>
+		요소.insertAfter(셀렉터) : 선택된 요소를 셀렉터에 의해 일치된 모든 요소들 뒤쪽에 삽입한다.<br>
+		요소.before(콘텐츠)      : 일치된 요소 앞에 콘텐츠를 삽입한다. 요소 외부에 삽입된다.<br>
+		요소.insertBefore(셀렉터) : 선택된 요소를 셀렉터에 의해 일치된 모든 요소들 앞쪽에 삽입한다.<br>
+	</h4>
+	<input type="button" id="after" value="after()">
+	<input type="button" id="insertAfter" value="insertAter()">
+	<input type="button" id="before" value="before()">
+	<input type="button" id="insertBefore" value="insertBefore()">
+	<br><br>
+	<p id="p5">요소</p>
+</div>
+	
+</body>
+</html>

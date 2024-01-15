@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btnview').on('click', function(){
+		user = $('#user').val();
+		
+		gend = $('.gend:checked').val();
+		
+		area = $('#intro').val();
+		area = area.replaceAll(/\n/g, "<br>"); // 언제 알려줌??
+		
+		work = $('#work option:selected').val();
+		
+		// 출력내용
+		str = `이름: ${user} <br>`;
+		str += `성별 : ${gend} <br>`;
+		str += `소개 : ${area} <br>`;
+		str += `직업 : ${work} <br>`;
+		
+		$('#res1').html(str);
+		// 조사하기 버튼 - submit으로 동작하는데
+		// 클릭 시 submit되고 기본은 get방식으로 동작하는데 
+		// 가려는 페이지가 없어서 내용이 사라지는거임
+	});
+	
+	$('#btnchange').on('click', ()=>{
+		// 버튼은 submit을 수행하는 버튼
+		// submit을 수행이 안되도록 설정
+		event.preventDefault();
+		
+		// 이름 입력
+		userName = prompt("이름입력");
+		
+		$('#user').val(userName);
+	});
+	
+	$('a').on('click', function(){
+		age = 10;
+		if(age < 15){
+			event.preventDefault();
+			alert("대상이 아닙니다.");
+		}
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+<style type="text/css">
+textarea{
+	vertical-align: top;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<a href="http://www.naver.com">네이버</a>
+	<br><br>
+	<div id="result1">
+	<form>
+		<label for="user">이름</label>
+		<input type="text" id="user" value="korea"><br>
+		<label >성별</label>
+		<input type="radio" class=“gend" name="gend" value="남자" checked >남자
+		<input type="radio" class=“gend" name="gend" value="여자" >여자<br>
+		
+		<label for="intro">소개</label>
+		<textarea id="intro" cols="40" rows="4"></textarea> <br>
+		<label for="work">직업</label>
+		<select id="work">
+		<option value="programmer">프로그래머</option>
+		<option value="progammer">프로게이머</option>
+		<option value="whitehand">백수</option>
+		</select><br>
+		<button type="button" id="btnview">조사하기 </button>
+		<button id="btnchange">이름변경 </button>
+		</form>
+	</div>
+	<div id=res1></div>
+</div>
+
+</body>
+</html>
