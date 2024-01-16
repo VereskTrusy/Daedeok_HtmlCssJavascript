@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	// btn1 click
+	$('#btn1').on('click', function(){
+		$('#result1 img').attr('title', function(){ // 선택된 이미지의 'title'속성 설정
+			let vSrc = $(this).attr('src'); // src 속성을 가져온다.
+			let start = vSrc.lastIndexOf("/")+1; // 경로에서 파일명을 추출하기 위해 끝에서 "/" 문자열이 들어간 인덱스를 탐색한다. 
+			let end = vSrc.lastIndexOf("."); // 끝에서 "."의 인덱스를 탐색한다.  
+			let vTitle = vSrc.slice(start, end); // 경로+파일명.확장자 에서 파일명만을 추출한다.("."은 포함되지 않음)
+			return vTitle; // title 속성을 설정한다.
+		});
+	});
+	
+	// 마우스 오버 시 - src 속성을 변경하여 다른 이미지로 대체한다.
+	$('#result2 img').on('mouseover',function(){
+		// 새로운 이미지 변경
+		// src 속성을 값을 가져오기 - 변수 대입
+		vsrc = $(this).attr('src');
+		
+		// name 속성의 값을 가져오기 - 변수 대입
+		vname = $(this).attr('name');
+		
+		// name 속성 값으로 src 속성을 변경하기
+		$(this).attr('src', vname);
+	});
+	
+	// 마우스 아웃 시 - src속성을 변경하여 원본 이미지로 대체한다.
+	$('#result2 img').on('mouseout',function(){
+		// 원래 이미지로 변경
+		$(this).attr('src', vsrc);
+	});
+	
+	// 마우스 더블클릭 시 - 화면에서 숨김 설정한다.
+	$('#result2 img').on('dblclick',function(){
+		// 대상이미지를 안보이게 설정하기
+		$(this).hide(); // 하위 주석2개는 화면에서 요소를 숨기는 다른 방법을 제시한다.
+		//$(this).attr('display', 'none');
+		//$(this).css('display',"none");
+		
+		// 비교 - 보이는 이미지 갯수 0이면 확인 버튼 보이게 설정
+		if($('#result2 img:visible').length < 1){ // 요소의 상태가 'visible'인 요소의 갯수를 구할 수 있다.
+			$('#btn2').show();
+			//$('#btn2').hide();
+		}
+	});
+	
+	// btn2 click - btn2를 다시 숨김 상태로 되돌린다.
+	$('#btn2').on('click',function(){
+		$('#result2 img').show();
+		$('#btn2').hide();
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+<style>
+img{
+	width: 100px;
+	height: 100px;
+}
+#btn2{
+	display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<h4>
+		attr(name) : 매치된 첫번째 요소의 name에 지정된 속성의 값을 가져온다. 지정된 속성 명이 존재하지 않는다면 undefined가 반환된다<br>
+		attr(properties) : 매치되는 모든 요소들의 속성을 키:값 의 형태로 지정한다<br>
+		attr(key, value) : 매치되는 모든 요소들의 속성을 단일 값으로 지정한다<br>
+		attr(key, fn) : 매치되는 모든 요소들의 단일속성에 대한 fn에서 수행된 값을 지정한다<br>
+		removeAttr(name) : 매치된요소의 속성을 제거한다<br>
+	</h4>
+	<input type="button" id="btn1" value="btn1">
+	<br><br>
+	<div id="result1">
+		<img src="../images/cloud03.jpg" alt="cloud03.jpg">
+		<img src="../images/Sony1.jpg" alt="Sony1.jpg">
+		<img src="../images/sw_off.png" alt="sw_off.png">
+		<img src="../images/국화.jpg" alt="국화.jpg">
+		<img src="../images/라떼.jpeg" alt="라떼.jpeg">
+		<img src="../images/무지게3.png" alt="무지게3.png">
+	</div>
+</div>
+
+<div class="box">
+	<h4>
+	마우스 over 시 다른 이미지로 변경하기<br>
+	마우스 out 시 원래 이미지로 변경하기<br>
+	</h4>
+	<input type="button" id="btn2" value="btn2">
+	<br><br>
+	<div id="result2">
+		<img src="../images/cloud03.jpg" alt="cloud03.jpg" name="../images/펭귄.jpg">
+		<img src="../images/Sony1.jpg" alt="Sony1.jpg"  name="../images/Lighthouse.jpg">
+		<img src="../images/sw_off.png" alt="sw_off.png"  name="../images/펭귄.jpg">
+		<img src="../images/국화.jpg" alt="국화.jpg"  name="../images/pattern.jpg">
+		<img src="../images/라떼.jpeg" alt="라떼.jpeg"  name="../images/spongebob.png">
+		<img src="../images/무지게3.png" alt="무지게3.png"  name="../images/Tulips.jpg">
+	</div>
+</div>
+
+</body>
+</html>

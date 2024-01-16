@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn1').on('click',function(){
+		// 각 요소의 현재 상태를 가져오기
+		
+		let vchk = $('#checkBox').prop('checked'); // 체크 박스에서 체크된 요소 가져옴
+		let vsel = $('#selectBox option').eq(2).prop('selected'); // 셀렉트 박스에서 두번째 요소 가져옴
+		let vread = $('#inputBox').prop('readonly'); // 인풋박스의 readonly 설정된 요소 가져옴
+		let vdisable = $('#runBtn').prop('disabled'); // 버튼 중 disabled 설정된 요소 가져옴
+		
+		// 상태값 텍스트로 만들기 
+		let msg = "1차 상태 <br>";
+		msg += "체크박스(라디오버튼) : " + vchk + "<br>";
+		msg += "리스트박스(select객체) : " + vsel + "<br>";
+		msg += "text객체	(readonly) : " + vread + "<br>";
+		msg += "button객체(disabled) : " + vdisable + "<br>";
+		
+		
+		// 각 요소의 상태 출력
+		$('#result1').html(msg);
+		
+		// 현재 상태 변경하기
+		//if(vchk == true) $('#checkBox').prop('checked', false);
+		//else $('#checkBox').prop('checked', true);
+		
+		//if(vsel == true) $('#selectBox option').eq(2).prop('selected', false);
+		//else $('#selectBox option').eq(2).prop('selected', true);
+		
+		//if(vread == true) $('#inputBox').prop('readonly', false);
+		//else $('#inputBox').prop('readonly', true);
+		
+		//if(vdisable == true) $('#runBtn').prop('disabled', false);
+		//else $('#runBtn').prop('disabled', true);
+		
+		// 현재 상태 변경하기
+		if(vchk) $('#checkBox').prop('checked', !vchk);
+		else $('#checkBox').prop('checked', !vchk);
+		
+		if(vsel) $('#selectBox option').eq(2).prop('selected', !vsel);
+		else $('#selectBox option').eq(2).prop('selected', !vsel);
+		
+		if(vread) $('#inputBox').prop('readonly', !vread);
+		else $('#inputBox').prop('readonly', !vread);
+		
+		if(vdisable) $('#runBtn').prop('disabled', !vdisable);
+		else $('#runBtn').prop('disabled', !vdisable);
+		
+		
+		
+		// 상태값 텍스트로 만들기 
+		msg += "2차 상태 <br>";
+		msg += "체크박스(라디오버튼) : " + vchk + "<br>";
+		msg += "리스트박스(select객체) : " + vsel + "<br>";
+		msg += "text객체	(readonly) : " + vread + "<br>";
+		msg += "button객체(disabled) : " + vdisable + "<br>";
+		
+		// 각 요소의 상태 출력
+		$('#result1').html(msg);
+	});
+	
+	$('#chkBoxAll').on('change', function(){
+		// 현재 이벤트 실행대상 (this)의 checked 상태 값을 가져온다.
+		vchk = $(this).prop('checked');
+		
+		// class="chk" 인 요소의 vchk값으로 checked 속성을 설정한다.
+		$('.chkBox').prop('checked', vchk);
+		// $$('.chkBox').attr('checked', "");
+		
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+<div class="box">
+	<input type="button" id="btn1" value="실행">
+	<br><br>
+	<form>
+		체크박스(라디오버튼) : 
+		<input type="checkBox" id="chkBox" checked>
+		
+		<br><br>
+		
+		리스트박스(select객체) : 
+		<select id="selectBox">
+			<option value="1">하나</option> 
+			<option value="2">둘</option>
+			<option value="3" selected >셋</option> 
+			<option value="4">넷</option>
+		</select>
+		
+		<br><br>
+		
+		text객체	(readonly) : 
+		<input type="text" value="가나다" id="inputBox">
+		
+		<br><br>
+		
+		button객체(disabled) : 
+		<input type="button" value="실행" id="runBtn" >
+	</form>
+	현재 상태 : 
+	<div id="result1"></div>
+</div>
+
+
+
+<div class="box">
+	<input type="button" id="btn2" value="btn2">
+	<br><br>
+	체크박스(전체선택/해제) : 
+	<input type="checkBox" id="chkBoxAll" checked>전체선택
+	<input type="checkBox" class="chkBox" value="1">1
+	<input type="checkBox" class="chkBox" value="1">2
+	<input type="checkBox" class="chkBox" value="1">3
+	<input type="checkBox" class="chkBox" value="1">4
+	<input type="checkBox" class="chkBox" value="1">5
+	<br>
+	<div id="result2"></div>
+	<br>
+</div>
+
+</body>
+</html>

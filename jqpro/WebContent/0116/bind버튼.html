@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.btn1').on('click',function(){
+		// 새로운 버튼을 만듭니다.
+		newBtn = $('<input type="button" class="btn1" value="확인">');
+		
+		// result1번에 추가한다.
+		$('#result1').append(newBtn);
+	});
+	
+	$('.btn2').on('click',function(){
+		// btn1 버튼의 onclick 이벤트를 해제한다
+		//$('.btn1').off('click', 해제후다른동작을 원하면 해당 펑션을 정의하고 사용한다.);
+		$('.btn1').off('click');
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" class="btn1" value="신규버튼 생성">
+	<input type="button" class="btn2" value="해제">
+	<br><br>
+	<div id="result1"></div>
+</div>
+
+</body>
+</html>
