@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+function asyncFunc(url) {
+	return new Promise(function(resolve, reject) {
+		const xhr = new XMLHttpRequest();
+		xhr.open("GET", url, true);
+		xhr.onload = () => resolve(xhr.responseText);
+		xhr.onerror = () => reject(xhr.statusText);
+		xhr.send();
+	});
+}
+ 
+data2 = {a, b};
+
+textproc = ({a, b}) => {
+	asyncFunc("text.jsp").then(text => {
+		console.log(text);
+		vstr = text.split("/");
+		
+		code = "<ul>";
+		vstr.forEach((str) =>{
+			code += "<li>" + str + "</li>"; 
+		});
+		code += "</ul>";
+		
+		$('#result1').html(code);
+	});
+}
+
+
+arrproc = () => {
+	asyncFunc("arr.jsp").then(text => {
+		console.log(text);
+		return JSON.parse(text);
+	}).then(data => {
+		code = "<ol>";
+		data.forEach((str) =>{
+			code += "<li>" + str + "</li>"; 
+		});
+		code += "</ol>";
+		
+		$('#result2').html(code);
+	});
+}
+
+
+objproc = () => {
+	asyncFunc("obj.jsp")
+	.then(text => {
+		return JSON.parse(text);
+	})
+	.then(data => {
+		code  = `이름 : ${data.name} <br>`;
+		code += `주소 : ${data.addr} <br>`;
+		code += `전화번호 : ${data.tel} <br>`;
+		
+		$('#result3').html(code);
+	});
+}
+
+
+objarrproc = () => {
+	asyncFunc("objarr.jsp")
+	.then( text => {
+		return JSON.parse(text);
+	})
+	.then( data => {
+		code = "";
+		data.forEach((str, i) => {
+			code += `${i} 번째 정보`;
+			code += `이름 : ${str.name} <br>`;
+			code += `주소 : ${str.addr} <br>`;
+			code += `전화번호 : ${str.tel} <br><br>`;				
+		});
+		
+		$('#result4').html(code);
+	});
+}
+
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+<style type="text/css">
+div#content{
+	display: flex;
+	flex-direction: row;
+}
+div .res{
+	flex: 25%; /* flex 크기지정 */
+	border: 1px solid blue;
+	box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="text" value="btn1" onclick="textproc()">
+	<input type="button" id="arr" value="btn1" onclick="arrproc()">
+	<input type="button" id="jsonobj" value="btn1" onclick="objproc()">
+	<input type="button" id="jobjarr" value="btn1" onclick="objarrproc()">
+	<br><br>
+	<div id="content">
+		<div id="result1" class="res"></div>
+		<div id="result2" class="res"></div>
+		<div id="result3" class="res"></div>
+		<div id="result4" class="res"></div>
+	</div>
+</div>
+
+</body>
+</html>

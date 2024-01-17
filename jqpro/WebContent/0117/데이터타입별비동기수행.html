@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+let xhr = new XMLHttpRequest();
+
+// 텍스트 형태로 비동기로 받아서 처리
+function textproc() {
+	// 요청
+	xhr.open("GET", "text.jsp", true);
+	xhr.send();
+	
+	// 응답
+	xhr.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200){
+			res = this.responseText;
+			// res에 응답 받은 데이터 : 홍길동/개나리/진달래/무궁화/수선화/라일락
+			
+			// 동적으로 리스트 만들어 데이터 집어넣기
+			res = res.split("/"); // 배열로 변경
+			
+			code = "<ul>";
+			/* for(i=0; i<res.length; i++){ // 기존 방식
+				res[i];
+			} */
+			
+			/* $.each(res, function(i){ // jquery 반복문
+				res[i]
+			}) */
+			
+			// ES6 반복문 형식
+			res.forEach((str) =>{ // str = res[0] ... 이런의미, res.forEach((str, i) =>{} 여기서 i는 i:인덱스(옵션)
+				code += "<li>" + str + "</li>"; 
+			});
+			code += "</ul>";
+			
+			$('#result1').html(code);
+		}
+	}
+}
+
+// JSON 형식으로 받아서 처리
+function arrproc() {
+	// 요청
+	xhr.open("GET", "arr.jsp", true);
+	xhr.send();
+	
+	// 응답
+	xhr.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200){
+			res = this.responseText; // res에 응답 받은 데이터 : ["홍길동","개나리","진달래","무궁화","수선화","라일락"]
+			
+			// json형식, 형태의 배열값을 script객체로 변환 필요 - JSON.parse()
+			jres = JSON.parse(res);
+			
+			// 동적으로 리스트 만들어 데이터 집어넣기
+			code  = "<ol>";
+			jres.forEach(str => {
+				code += "<li>" + str + "</li>";
+			});
+			code += "</ol>";
+			
+			$('#result2').html(code);
+		}
+	}
+}
+
+// 오브젝트로 받아서 처리
+function objproc() {
+	// 요청
+	xhr.open("GET", "obj.jsp", true);
+	xhr.send();
+	
+	// 응답
+	xhr.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200){
+			res = this.responseText;
+			
+			// json형식, 형태의 배열값을 script객체로 변환 필요 - JSON.parse()
+			jres = JSON.parse(res);
+			
+			code = `이름 : ${jres.name} <br>`;
+			code += `주소 : ${jres.addr} <br>`;
+			code += `전화번호 : ${jres.tel} <br>`;
+			
+			$('#result3').html(code);
+		}
+	}
+}
+
+// 
+function objarrproc() {
+	// 요청
+	xhr.open("GET", "objarr.jsp", true);
+	xhr.send();
+	
+	// 응답
+	xhr.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200){
+			res = this.responseText; // [{},{}, ... {}]
+			
+			// json형식, 형태의 배열값을 script객체로 변환 필요 - JSON.parse()
+			jres = JSON.parse(res);
+			
+			code = "";
+			jres.forEach((str, i) => {
+				code += `${i} 번째 정보`;
+				code += `이름 : ${str.name} <br>`;
+				code += `주소 : ${str.addr} <br>`;
+				code += `전화번호 : ${str.tel} <br><br>`;				
+			});
+			
+			
+			
+			$('#result4').html(code);
+		}
+	}
+}
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+<style type="text/css">
+div#content{
+	display: flex;
+	flex-direction: row;
+}
+div .res{
+	flex: 25%; /* flex 크기지정 */
+	border: 1px solid blue;
+	box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="text" value="btn1" onclick="textproc()">
+	<input type="button" id="arr" value="btn1" onclick="arrproc()">
+	<input type="button" id="jsonobj" value="btn1" onclick="objproc()">
+	<input type="button" id="jobjarr" value="btn1" onclick="objarrproc()">
+	<br><br>
+	<div id="content">
+		<div id="result1" class="res"></div>
+		<div id="result2" class="res"></div>
+		<div id="result3" class="res"></div>
+		<div id="result4" class="res"></div>
+	</div>
+</div>
+
+</body>
+</html>

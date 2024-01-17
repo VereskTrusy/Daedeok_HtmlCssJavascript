@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+/* window.onload = function(){
+	vsend = document.getElementById('send');
+	vsend.addEventListener('click', sendProc);
+}
+
+sendProc = function(){
+	
+} */
+
+
+// 전역
+let xhr = new XMLHttpRequest();
+
+$(document).ready(function(){
+	// 비동기 - post
+	$('#send').on('click', function(){
+		// 입력한 값을 가져온다.
+		/* let idvalue = document.frm.id2.value;
+		let namevalue = document.frm.name2.value; */
+		
+		let idvalue = $('#id2').val().trim();
+		let namevalue = $('#name2').val().trim();
+		
+		data = "id=" + idvalue + "&name=" + namevalue;
+		
+		// 요청
+		xhr.open("POST", "비동기.jsp", true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(data); // post방식은 send로 data를 따로 던진다
+		
+		// 응답
+		xhr.onreadystatechange = function() {
+			alert("readyState : " + this.readyState); // 
+			if(this.readyState == 4 && this.status == 200) {
+				res = this.responseText;
+				//rjson = JSON.parse(res);
+				
+				$('#res2').html(res);
+			}
+		}		
+	});
+	
+	
+	// 전역변수는 
+	// 비동기 - get
+	$('#gsend').on('click', function(){
+		let idvalue = $('#id3').val().trim();
+		let namevalue = $('#name3').val().trim();
+		
+		data = "id=" + idvalue + "&name=" + namevalue;
+		
+		// 요청
+		xhr.open("GET", "비동기.jsp?"+data, true); // true : 비동기처리, false : 동기
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(data); // post방식은 send로 data를 따로 던진다
+		
+		// 응답
+		xhr.onreadystatechange = function() {
+			if(this.readyState == 4 && this.status == 200) {
+				res = this.responseText;
+				$('#res3').html(res);
+			}
+		}
+	});
+});
+
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+<style>
+table{
+	border : 1px solid gray;
+}
+td{
+	
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+	<h4>동기방식 - POST</h4>
+	<br><br>
+	<div id="result1">
+		<form action="비동기.jsp" method="post">
+			아이디 <input type="text" name="id"><br>
+			이름 <input type="text" name="name"><br>
+			<input type="submit" value="전송">
+		</form>
+	</div>
+</div>
+
+<div class="box">
+	<h4>비동기방식 - POST</h4>
+	<br><br>
+	<div id="result2">
+		<form name="frm">
+			아이디 <input type="text" id="id2" name="id"><br>
+			이름 <input type="text" id="name2" name="name"><br>
+			<input type="button" id="send" value="전송">
+		</form>
+	</div>
+</div>
+
+<div class="box">
+	<h4>비동기방식 - get</h4>
+	<br><br>
+	<div id="result3">
+		<form name="frm">
+			아이디 <input type="text" id="id3" name="id"><br>
+			이름 <input type="text" id="name3" name="name"><br>
+			<input type="button" id="gsend" value="전송">
+		</form>
+	</div>
+</div>
+
+<div id="res3"></div>
+
+</body>
+</html>
