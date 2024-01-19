@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(() => {
+	
+	// 버튼 1 비동기 ajax 사용
+	$('#btn1').on('click', () => {
+		$.ajax({
+			url : '/jqpro/0119/LprodServlet.jsp',
+			type : 'GET',
+			//data : '',
+			success : function(result){
+				//alert('성공');
+				// html 요소 작성
+				code = `<table border="1">`;
+				code += `<tr><th>아이디</th>`;
+				code += `<th>분류코드</th>`;
+				code += `<th>분류명</th></tr>`;
+				
+				$.each(result, function(index, value){
+					code += `<tr><td>${result[index].lprod_id}</td>`;
+					code += `<td>${result[index].lprod_gu}</td>`;
+					code += `<td>${result[index].lprod_nm}</td></tr>`;
+				});
+				code += `</table>`;
+				
+				// 출력
+				$('#result1').html(code);
+			},
+			error : function(xhr) {
+				// 에러 내용 출력
+				alert(`status : ${xhr.status}\r\ncode : ${xhr.statusText}\r\nmessage : ${status.responseText}`);
+			},
+			dataType : 'json'
+		});
+	})
+})
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="btn1" value="lprod ajax">
+	<input type="button" id="btn2" value="lprod fetch">
+	<br><br>
+	<div id="result1"></div>
+</div>
+
+</body>
+</html>

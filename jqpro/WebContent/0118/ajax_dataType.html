@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(()=>{
+	$('#jobjarr').on('click', function(){
+		$.getJSON('./objarr.jsp', function(res){
+			// 출력할 내용 만들기
+			code = "";
+			$.each(res, function(index, value){
+				code += `${index} 번째 정보`;
+				code += `이름 : ${value.name} <br>`;
+				code += `주소 : ${value.addr} <br>`;
+				code += `전화번호 : ${value.tel} <br><br>`;	
+			});
+			
+			// 출력
+			$('#result4').html(code);
+		});
+	});
+	
+	
+	$('#jsonobj').on('click', function(){
+		$.ajax({
+			url : './obj.jsp',
+			type : 'get',
+			//data : '',
+			success : function(res){
+				alert("성공");
+				// 출력내용 만들기
+				// 출력
+			},
+			error : function(xhr){
+				alert("status : " + xhr.status + // 200번 응답 후 에러검출해보기
+						"\r\ncode : " + xhr.statusText + // 이름?
+						"\r\nmessage : " + status.responseText); // 자세한 메시지 내용
+				
+			}, // 좋다
+			dataType : 'json'
+		});
+	});
+	
+	$('#arr').on('click', function(){
+		$.ajax({
+			url : "./arr.jsp",
+			type : "GET",
+			//data : "",
+			success : function(res) {
+				// 출력할 내용 만들기
+				code = "<ol>";
+				
+				$.each(res, function(index, value){
+					code += "<li>" + res[index] + "</li>"; // res[index] 대신 value를 사용해도된다.
+				});
+				
+				code += "</ol>";
+				
+				// 출력
+				$('#result2').html(code);
+			},
+			error : function(xhr) {
+				
+			},
+			dataType : "json"
+		});
+	});
+	
+	
+	$('#text').on('click', () => {
+		// ajax 단축형
+		// 1. $.get(url, data, success, dataType);
+		// $.get("aa.jsp","id=aaa", function(result){ }, "json");
+		
+		// 2. $.post(url, data, success, dataType);
+		// $.post("aa.jsp","id=aaa", function(result){ }, "json");
+		
+		// 3. getJSON(url, data, success);
+		// getJSON("aa.jsp", "id=aaa", function(result){ });
+		
+		
+		$.ajax({
+			url : "./text.jsp",
+			type : "GET",
+			//data : "id=aaa",
+			success : function(result) {
+				// 동적으로 리스트 만들어 데이터 집어넣기
+				result = result.split("/"); // 배열로 변경
+				
+				// 출력할 내용 만들기
+				code = "<ul>";
+				result.forEach((str) =>{ // str = res[0] ... 이런의미, res.forEach((str, i) =>{} 여기서 i는 i:인덱스(옵션)
+					code += "<li>" + str + "</li>"; 
+				});
+				code += "</ul>";
+				
+				// 출력
+				$('#result1').html(code);
+			},
+			error : function(xhr) {
+				alert('상태 : ' + xhr.status); 
+				// 200인데도 오류인 경우 json파싱하다가 오류가 나는 경우
+			},
+			dataType : "text"
+		});
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="text" value="text">
+	<input type="button" id="arr" value="arr">
+	<input type="button" id="jsonobj" value="jsonobj">
+	<input type="button" id="jobjarr" value="jobjarr">
+	<br><br>
+	<div id="content">
+		<div id="result1" class="res"></div>
+		<div id="result2" class="res"></div>
+		<div id="result3" class="res"></div>
+		<div id="result4" class="res"></div>
+	</div>
+</div>
+
+</body>
+</html>

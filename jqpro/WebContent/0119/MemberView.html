@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(() => {
+	// 버튼 2 클릭, fetch 사용
+	$('#btn2').on('click', function(){
+		promise = fetch('/jqpro/0119/MemberServlet.jsp')
+		.then(response => {
+			return response.json();
+		})
+		.then(data => {
+			
+			code = `<table border="1">`;
+			code += `<tr><td>아이디</td>`;
+			code += `<td>이름</td>`;
+			code += `<td>전화번호</td><tr>`;
+			
+			$.each(data, function(index, value){
+				code += `<tr><td>${data[index].mem_id}</td>`;
+				code += `<td>${data[index].mem_name}</td>`;
+				code += `<td>${data[index].mem_hp}</td></tr>`;
+			});
+			code += `</table>`;
+			
+			$('#result1').html(code);
+		});
+	});
+	
+	// 버튼 1 클릭, ajax 사용
+	$('#btn1').on('click', function(){
+		$.ajax({
+			url : "/jqpro/0119/MemberServlet.jsp", // 맨앞에  "/" 써줘야 디렉토리를 제대로 찾아간다
+			type : "GET",
+			//data : "",
+			success : function(res){
+				//alert("성공");
+				
+				code = `<table border="1">`;
+				code += `<tr><td>아이디</td>`;
+				code += `<td>이름</td>`;
+				code += `<td>전화번호</td><tr>`;
+				
+				$.each(res, function(index, value){
+					code += `<tr><td>${res[index].mem_id}</td>`;
+					code += `<td>${res[index].mem_name}</td>`;
+					code += `<td>${res[index].mem_hp}</td><tr>`;
+				});
+				code += `</table>`;
+				
+				$('#result1').html(code);
+				
+			},
+			error : function(xhr){
+				alert("status : " + xhr.status);
+			},
+			dataType : 'json'
+			
+		});
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="btn1" value="멤버리스트 ajax">
+	<input type="button" id="btn2" value="멤버리스트 fetch">
+	<br><br>
+	<div id="result1"></div>
+</div>
+
+</body>
+</html>
