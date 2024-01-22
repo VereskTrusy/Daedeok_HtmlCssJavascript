@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(() => {
+	
+	// select Box 의 항목을 선택하면 관련된 데이터를 테이블에 뿌려주기
+	$('#prod').on('change', function(){
+		let selectedProdId = $('option:selected', this).val().trim();
+		//alert(selectedProdId);
+		
+		if(selectedProdId != null){
+			// 서버로 전송해서 prod 상세 정보 들고 오기
+			$.ajax({
+				url : '/jqpro/0122/ProdInfoServlet.jsp',
+				type : 'GET',
+				data : 'prod_id=' + selectedProdId,
+				success : function(res){
+					
+					code = `<table border="1">`;
+					
+					code += `<tr><th>제품아이디</th>`;
+					code += `<td>${res.prod_id}</td></tr>`;
+					
+					code += `<tr><th>제품명</th>`;
+					code += `<td>${res.prod_name}</td></tr>`;
+					
+					code += `<tr><th>제품분류</th>`;
+					code += `<td>${res.prod_lgu}</td></tr>`;
+					
+					code += `<tr><th>바이어</th>`;
+					code += `<td>${res.prod_buyer}</td></tr>`;
+					
+					code += `<tr><th>단가</th>`;
+					code += `<td>${res.prod_cost}</td></tr>`;
+					
+					code += `<tr><th>판매가</th>`;
+					code += `<td>${res.prod_price}</td></tr>`;
+					
+					code += `</table>`;
+					
+					$('#result1').html(code);
+				},
+				error : function(xhr){
+					// 에러 내용 출력
+					alert(`prod상세보기 오류 ->\r\nstatus : ${xhr.status}\r\ncode : ${xhr.statusText}\r\nmessage : ${status.responseText}`);
+				},
+				dataType : 'json'
+			});
+		}
+		
+		
+	});
+	
+	
+	// LPROD 선택되면 해당하는 PROD 리스트 출력
+	$('#lprod').on('change', function(){
+		// lprod(부모) 선택한 항목의 Option(자식) value 값을 가져오기
+		//alert($('#lprod option:selected').val().trim());
+		let guValue = $('option:selected', this).val().trim();
+		
+		// 서버로 전송
+		$.ajax({
+			url : '/jqpro/0122/ProdLguServlet.jsp',
+			type : 'GET' ,
+			data : 'lprod_gu=' + guValue,
+			success : function(res){
+				//alert("성공");
+				code = "";
+				if(res.flag = "OK"){
+					
+					code += `<option value="">= 선 택 =</option>`;
+					
+					$.each(res.datas, function(i, v){
+						code += `<option value="${v.prod_id}">${v.prod_name}</option>`;
+					});
+					
+				}else{
+					
+					code += `<option value="">데이터 없음</option>`;
+					
+				}
+				
+				$('#prod').append(code);
+			},
+			error : function(xhr){
+				// 에러 내용 출력
+				alert(`prod리스트 오류 ->\r\nstatus : ${xhr.status}\r\ncode : ${xhr.statusText}\r\nmessage : ${status.responseText}`);
+			},
+			dataType : 'json'
+		});
+	});
+	
+	
+	// 버튼 1 비동기 ajax 사용 - LPROD 출력
+	$('#btn1').on('click', () => {
+		$.ajax({
+			url : '/jqpro/0122/LprodServlet.jsp',
+			type : 'GET',
+			//data : '',
+			success : function(result){
+				
+				code = "";
+				code += `<option value="">= 선 택 =</option>`;
+				
+				$.each(result, function(i, v){
+					code += `<option value="${v.lprod_gu}">${v.lprod_nm}</option>`;
+				});
+				
+				$('#lprod').append(code);
+			},
+			error : function(xhr) {
+				// 에러 내용 출력
+				alert(`LPROD 리스트 오류 ->\r\nstatus : ${xhr.status}\r\ncode : ${xhr.statusText}\r\nmessage : ${status.responseText}`);
+			},
+			dataType : 'json'
+		});
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<h4></h4>
+	<input type="button" id="btn1" value="lprod ajax">
+	<input type="button" id="btn2" value="lprod fetch">
+	<br><br>
+	<select id="lprod"></select>
+	<select id="prod"></select>
+	<div id="result1"></div>
+</div>
+
+</body>
+</html>
