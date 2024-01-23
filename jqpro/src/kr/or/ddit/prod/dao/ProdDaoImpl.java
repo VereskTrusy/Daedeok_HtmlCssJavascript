@@ -36,7 +36,7 @@ public class ProdDaoImpl implements IProdDao {
 		List<ProdVo> prodList = null;
 		
 		String sql = "SELECT PROD_ID, PROD_NAME FROM PROD WHERE PROD_LGU = ?";
-		System.out.println("SELECT PROD_ID, PROD_NAME FROM PROD WHERE PROD_LGU =" + lprod_lgu);
+		System.out.println("[ProdDaoImpl.selectByLguList.Sql] SELECT PROD_ID, PROD_NAME FROM PROD WHERE PROD_LGU =" + lprod_lgu);
 		
 		try {
 			conn = JDBCUtil3.getConnection();
@@ -78,7 +78,7 @@ public class ProdDaoImpl implements IProdDao {
 		ProdVo prodInfo = null;
 		
 		String sql = "SELECT * FROM PROD WHERE PROD_ID = ? ";
-		System.out.println("SELECT * FROM PROD WHERE PROD_ID = " + prod_id);
+		System.out.println("[ProdDaoImpl.selectByProdId.Sql] SELECT * FROM PROD WHERE PROD_ID = " + prod_id);
 		
 		try {
 			conn = JDBCUtil3.getConnection();

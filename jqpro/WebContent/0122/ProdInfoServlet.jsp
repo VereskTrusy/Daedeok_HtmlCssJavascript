@@ -6,6 +6,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+
+
 String prod_id = request.getParameter("prod_id");
 
 IProdService service = ProdServiceImpl.getInstance();

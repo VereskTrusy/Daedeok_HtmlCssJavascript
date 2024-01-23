@@ -22,9 +22,9 @@ $(() => {
 		if(selectedProdId != null){
 			// 서버로 전송해서 prod 상세 정보 들고 오기
 			$.ajax({
-				url : '/jqpro/0122/ProdInfoServlet.jsp',
+				url : '/jqpro/0122/LprodServlet.jsp',
 				type : 'GET',
-				data : 'prod_id=' + selectedProdId,
+				data : 'prod_id=' + selectedProdId + '&menu=ProdInfoServlet',
 				success : function(res){
 					
 					code = `<table border="1">`;
@@ -71,9 +71,9 @@ $(() => {
 		
 		// 서버로 전송
 		$.ajax({
-			url : '/jqpro/0122/ProdLguServlet.jsp',
+			url : '/jqpro/0122/LprodServlet.jsp',
 			type : 'GET' ,
-			data : 'lprod_gu=' + guValue,
+			data : 'lprod_gu=' + guValue + '&menu=ProdLguServlet',
 			success : function(res){
 				//alert("성공");
 				code = "";
@@ -107,7 +107,7 @@ $(() => {
 		$.ajax({
 			url : '/jqpro/0122/LprodServlet.jsp',
 			type : 'GET',
-			//data : '',
+			data : 'menu=LprodServlet',
 			success : function(result){
 				
 				code = "";

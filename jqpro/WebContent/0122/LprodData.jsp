@@ -7,7 +7,6 @@
 // 결과값타입 변수명 = request.getAttribute("name");
 List<LprodVo> list = (List<LprodVo>) request.getAttribute("list");
 
-
 // 변수명을 이용하여 json형식의 배열 데이터를 생성
 %>
 
