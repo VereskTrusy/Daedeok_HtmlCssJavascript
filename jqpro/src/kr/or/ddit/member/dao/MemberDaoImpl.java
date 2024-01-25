@@ -7,8 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.eclipse.jdt.internal.compiler.ast.TryStatement;
+
 import kr.or.ddit.member.vo.MemberVo;
+import kr.or.ddit.member.vo.ZipVo;
 import kr.or.ddit.util.JDBCUtil3;
+import kr.or.ddit.util.MyBatisUtil;
 
 public class MemberDaoImpl implements IMemberDao {
 	
@@ -67,6 +72,84 @@ public class MemberDaoImpl implements IMemberDao {
 			if(conn != null) { try { conn.close(); } catch(SQLException e) { e.printStackTrace(); }}
 		}
 		return list;
+	}
+
+	// 사용자 회원정보 등록(회원가입)
+	@Override
+	public int insertMember(MemberVo memberVo) {
+		System.out.println(memberVo.toString());
+		
+		SqlSession session = null;
+		int insertMemberCnt = 0;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			insertMemberCnt = session.insert("member.insertMember", memberVo);
+			
+			if(insertMemberCnt > 0) {
+				session.commit();
+				System.out.println("[System] 사용자 정보를 등록 했습니다.");
+			} else {
+				session.rollback();
+				System.out.println("[System] 사용자 정보를 등록에 실패 했습니다.");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return insertMemberCnt;
+	}
+
+	// 아이디 중복검사
+	@Override
+	public int selectIdChk(String memId) {
+		System.out.println("[dao] MemberDaoImpl.selectIdChk() 실행");
+		SqlSession session = null;
+		int selectIdChkCnt = 0;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			selectIdChkCnt = session.selectOne("member.selectIdChk", memId);
+			System.out.println("[dao] 조회결과 : " + memId);
+			if(selectIdChkCnt > 0) {
+				System.out.println("[System] 중복된 아이디가 있습니다.");
+			} else {
+				System.out.println("[System] 사용 가능한 아이디가 입니다.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) session.close();
+		}
+		
+		return selectIdChkCnt;
+	}
+
+	// 우편번호 검색
+	@Override
+	public List<ZipVo> selectSearchPost(String dong) {
+		
+		SqlSession session = null;
+		List<ZipVo> postList = null;
+		
+		try {
+			session = MyBatisUtil.getSqlSession();
+			postList = session.selectList("member.selectSearchPost", dong);
+			
+			if(postList == null || postList.isEmpty()) {
+				System.out.println("[System] 우편번호 검색에 실패 했습니다.");
+			} else {
+				System.out.println("[System] 우편번호 검색이 되었습니다.");
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(session != null) session.close();
+		}
+		
+		return postList;
 	}
 	
 	

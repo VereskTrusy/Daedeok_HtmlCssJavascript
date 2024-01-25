@@ -8,6 +8,14 @@ public class ProdVo {
 	private int prod_cost;
 	private int prod_price;
 	
+	private String menu;
+	
+	public String getMenu() {
+		return menu;
+	}
+	public void setMenu(String menu) {
+		this.menu = menu;
+	}
 	public String getProd_id() {
 		return prod_id;
 	}
@@ -47,8 +55,10 @@ public class ProdVo {
 	@Override
 	public String toString() {
 		return "ProdVo [prod_id=" + prod_id + ", prod_name=" + prod_name + ", prod_lgu=" + prod_lgu + ", prod_buyer="
-				+ prod_buyer + ", prod_cost=" + prod_cost + ", prod_price=" + prod_price + "]";
+				+ prod_buyer + ", prod_cost=" + prod_cost + ", prod_price=" + prod_price + ", menu=" + menu + "]";
 	}
+	
+	
 	
 	
 }

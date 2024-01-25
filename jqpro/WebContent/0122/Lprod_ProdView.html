@@ -10,24 +10,35 @@
 <!-- 외부 자바 스크립트 파일 임포트 -->
 <script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
 
+<!-- Bootstrap -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- 자바 스크립트 본문 시작 -->
 <script type="text/javascript">
+
 $(() => {
 	
 	// select Box 의 항목을 선택하면 관련된 데이터를 테이블에 뿌려주기
 	$('#prod').on('change', function(){
+		// 셀렉트 박스 초기화 진행
+		//$('#prod option').remove();
+		
+		
 		let selectedProdId = $('option:selected', this).val().trim();
 		//alert(selectedProdId);
-		
-		if(selectedProdId != null){
+		console.log("selectedProdId : " + selectedProdId);
+		if(selectedProdId != "" && selectedProdId != null){
 			// 서버로 전송해서 prod 상세 정보 들고 오기
 			$.ajax({
 				url : '/jqpro/0122/LprodServlet.jsp',
-				type : 'GET',
-				data : 'prod_id=' + selectedProdId + '&menu=ProdInfoServlet',
+				type : 'POST',
+				//data : 'prod_id=' + selectedProdId + '&menu=ProdInfoServlet',
+				data : JSON.stringify({"prod_id" : selectedProdId, "menu" : "ProdInfoServlet"}), // json형태의 데이터를 직렬화 한다.
 				success : function(res){
 					
-					code = `<table border="1">`;
+					let code = `<table class="table table-hover">`;
 					
 					code += `<tr><th>제품아이디</th>`;
 					code += `<td>${res.prod_id}</td></tr>`;
@@ -70,28 +81,29 @@ $(() => {
 		let guValue = $('option:selected', this).val().trim();
 		
 		// 서버로 전송
+		// JSON.stringify() : script의 객체를 JSON문자열로 직렬화 한다.
 		$.ajax({
 			url : '/jqpro/0122/LprodServlet.jsp',
-			type : 'GET' ,
-			data : 'lprod_gu=' + guValue + '&menu=ProdLguServlet',
+			type : 'POST' ,
+			//data : 'lprod_gu=' + guValue + '&menu=ProdLguServlet',
+			data : JSON.stringify({"prod_lgu" : guValue, "menu" : "ProdLguServlet"}), // json형태의 데이터를 직렬화 한다.
 			success : function(res){
 				//alert("성공");
-				code = "";
+				let code = "";
 				if(res.flag = "OK"){
-					
-					code += `<option value="">= 선 택 =</option>`;
+					$('#result1').empty(); // 내용지우기
+					//code += `<option value="">= 선 택 =</option>`;
 					
 					$.each(res.datas, function(i, v){
 						code += `<option value="${v.prod_id}">${v.prod_name}</option>`;
 					});
-					
+					$('#prod').append(code);
+					$('#prod').trigger('change');
 				}else{
-					
+					$('#result1').empty(); // 내용지우기
 					code += `<option value="">데이터 없음</option>`;
-					
+					$('#prod').append(code);
 				}
-				
-				$('#prod').append(code);
 			},
 			error : function(xhr){
 				// 에러 내용 출력
@@ -104,20 +116,23 @@ $(() => {
 	
 	// 버튼 1 비동기 ajax 사용 - LPROD 출력
 	$('#btn1').on('click', () => {
+		
 		$.ajax({
 			url : '/jqpro/0122/LprodServlet.jsp',
-			type : 'GET',
-			data : 'menu=LprodServlet',
+			type : 'POST',
+			//data : 'menu=LprodServlet',
+			data : JSON.stringify({"menu" : "LprodServlet"}), // json형태의 데이터를 직렬화 한다.
 			success : function(result){
 				
-				code = "";
-				code += `<option value="">= 선 택 =</option>`;
+				let code = "";
+				//code += `<option value="">= 선 택 =</option>`;
 				
 				$.each(result, function(i, v){
 					code += `<option value="${v.lprod_gu}">${v.lprod_nm}</option>`;
 				});
 				
 				$('#lprod').append(code);
+				$('#lprod').trigger('change');
 			},
 			error : function(xhr) {
 				// 에러 내용 출력
@@ -138,8 +153,18 @@ $(() => {
 	<input type="button" id="btn1" value="lprod ajax">
 	<input type="button" id="btn2" value="lprod fetch">
 	<br><br>
-	<select id="lprod"></select>
-	<select id="prod"></select>
+	<!-- <select id="lprod"></select> -->
+	<!-- <select id="prod"></select> -->
+	<div class="container mt-3">
+	  <h2>ajax & Bootstrap 연습</h2>
+	  <form>
+	    <label for="lprod" class="form-label">lprod list</label>
+	    <select class="form-select" id="lprod" name="lprod"></select>
+	    <br>
+	    <label for="prod" class="form-label">prod list</label>
+	    <select class="form-select" id="prod" name="prod"></select>
+	  </form>
+	</div>
 	<div id="result1"></div>
 </div>
 

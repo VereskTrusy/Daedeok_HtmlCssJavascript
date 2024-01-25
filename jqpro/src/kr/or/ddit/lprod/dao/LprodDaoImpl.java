@@ -37,7 +37,7 @@ public class LprodDaoImpl implements ILprodDao {
 		
 		// SQL 문
 		String sql = "SELECT * FROM LPROD";
-		System.out.println("[LprodDaoImpl.selectLprod.Sql] SELECT * FROM LPROD");
+		System.out.println("[SQL]     [LprodDaoImpl.selectLprod.Sql] SELECT * FROM LPROD");
 		
 		// DB 조회 및 데이터 획득
 		try {

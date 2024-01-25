@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 공통 CSS 스타일 -->
+<link rel="stylesheet" href="../CSS/public.css">
+
+<!-- 외부 자바 스크립트 파일 임포트 -->
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+
+<!--  -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
+
+<!-- 자바 스크립트 본문 시작 -->
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	// btn1 클릭 시 거래처 목록 출력
+	$('#btn1').on('click', function(){
+		console.log("btn1 click");
+		
+		$.ajax({
+			url : '/jqpro/buyer/buyerServlet.jsp',
+			type : 'POST',
+			//data : '',
+			success : function(res){
+				let code = ``;
+				
+				$.each(res, function(i, v){
+					code += `<div name=${v.buyer_id}>${v.buyer_name}</div>`;					
+				});
+				
+				$('#td1').append(code);
+			},
+			error : function(xhr){
+				alert(`buyer 리스트 오류 ->\r\nstatus : ${xhr.status}\r\ncode : ${xhr.statusText}\r\nmessage : ${status.responseText}`);
+			},
+			dataType : 'json'
+		});
+	});
+	
+	// 거래처명 클릭 시 실행
+	$(document).on('click', '#td1 div', function(e){
+		//alert($(this).text());
+		let testValue = $(this).attr('name');
+		alert(testValue);
+	});
+});
+</script>
+<!-- 자바 스크립트 본문 끝 -->
+
+</head>
+<body>
+
+<div class="box">
+	<input type="button" id="btn1" value="btn1">
+	<br><br>
+	<div id="result1">
+		<table id="table1" class="table table-hover">
+			<tr>
+				<td>거래처 이름</td>
+				<td>거래처 상세정보</td>
+			</tr>
+			<tr>
+				<td id="td1"></td>
+				<td id="td2"></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+</body>
+</html>

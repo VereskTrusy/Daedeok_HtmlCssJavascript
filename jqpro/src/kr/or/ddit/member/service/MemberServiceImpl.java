@@ -5,6 +5,7 @@ import java.util.List;
 import kr.or.ddit.member.dao.IMemberDao;
 import kr.or.ddit.member.dao.MemberDaoImpl;
 import kr.or.ddit.member.vo.MemberVo;
+import kr.or.ddit.member.vo.ZipVo;
 
 public class MemberServiceImpl implements IMemberService {
 	
@@ -26,13 +27,29 @@ public class MemberServiceImpl implements IMemberService {
 	}
 	
 
+	// 전체 리스트 가져오기
 	@Override
 	public List<MemberVo> getAllMember() {
-//		List<MemberVo> list = null;
-//		list = dao.getAllMember();
-//		return list;
-		
 		return dao.getAllMember();
+	}
+
+	// 사용자 회원정보 등록(회원가입)
+	@Override
+	public int insertMember(MemberVo memberVo) {
+		return dao.insertMember(memberVo);
+	}
+
+	// 아이디 중복검사
+	@Override
+	public int selectIdChk(String memId) {
+		System.out.println("[service] MemberServiceImpl.selectIdChk() 실행");
+		return dao.selectIdChk(memId);
+	}
+
+	// 우편번호 검색
+	@Override
+	public List<ZipVo> selectSearchPost(String dong) {
+		return dao.selectSearchPost(dong);
 	}
 	
 }
